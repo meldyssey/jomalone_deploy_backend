@@ -24,94 +24,106 @@ const upload = multer({
     limits: { fileSize: 5 * 1024 * 1024 },
 });
 
-app.use(cors());
+// app.use(cors());
+app.use(
+    cors({
+        credentials: true,
+        origin: [
+            "https://port-0-jomalone-deploy-backend-m5gmo1isb2cc7449.sel4.cloudtype.app/",
+            "https://web-jomalone-new-m5gmo1isb2cc7449.sel4.cloudtype.app/",
+            "http://localhost:3000",
+        ],
+        exposedHeaders: ["Authorization"],
+    })
+); // 모든 출처에서의 요청 허용
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/bk/imgs", express.static(path.join(__dirname, "imgs")));
+app.use("/imgs", express.static(path.join(__dirname, "imgs")));
 
 const adminCount = require("./controller/AdminMain.js");
-app.use("/bk/", adminCount());
+app.use("/", adminCount());
 
 //관리자페이지 - 회원정보조회
 const memberListRouter = require("./controller/MemberList.js");
-app.use("/bk/admin/member", memberListRouter());
+app.use("/admin/member", memberListRouter());
 
 const productRouter = require("./controller/product.js");
-app.use("/bk/admin/product", productRouter());
+app.use("/admin/product", productRouter());
 
 const productHomeRouter = require("./controller/productHome.js");
-app.use("/bk/product/", productHomeRouter());
+app.use("/product/", productHomeRouter());
 
 const basketRouter = require("./controller/Basket.js");
-app.use("/bk/basket/", basketRouter());
+app.use("/basket/", basketRouter());
 
 const payment1Router = require("./controller/Payment1.js");
-app.use("/bk/payment1/", payment1Router());
+app.use("/payment1/", payment1Router());
 
 const payment2Router = require("./controller/Payment2.js");
-app.use("/bk/payment2/", payment2Router());
+app.use("/payment2/", payment2Router());
 
 const adminOrderRouter = require("./controller/adminOrder.js");
-app.use("/bk/admin/order", adminOrderRouter());
+app.use("/admin/order", adminOrderRouter());
 
 // 일대일문의
 const onetooneRouter = require("./controller/one_to_one.js");
-app.use("/bk/onetoone/", onetooneRouter());
+app.use("/onetoone/", onetooneRouter());
 
 //리뷰
 const reviewRouter = require("./controller/review.js");
-app.use("/bk/review/", reviewRouter());
+app.use("/review/", reviewRouter());
 //리뷰신고
 const reportRouter = require("./controller/report.js");
-app.use("/bk/reports/", reportRouter);
+app.use("/reports/", reportRouter);
 
 //회원가입 라우터
 const signUpRouter = require("./controller/SignUp.js");
-app.use("/bk/signUp", signUpRouter);
+app.use("/signUp", signUpRouter);
 
 //중복확인 라우터
 const emailChkRouter = require("./controller/SignUp.js");
-app.use("/bk/signUp", emailChkRouter);
+app.use("/signUp", emailChkRouter);
 
 //로그인 라우터
 const signInRouter = require("./controller/SignIn.js");
-app.use("/bk/signIn", signInRouter);
+app.use("/signIn", signInRouter);
 
 //마이페이지 라우터
 const myinfoRouter = require("./controller/MyInfo.js");
-app.use("/bk/myPage/", myinfoRouter());
+app.use("/myPage/", myinfoRouter());
 
 //회원정보 수정 라우터
 const myinfoeditRouter = require("./controller/MyInfo.js");
-app.use("/bk/myPage/myinfoEdit", myinfoeditRouter());
+app.use("/myPage/myinfoEdit", myinfoeditRouter());
 
 //배송주소록 라우터
 const addressListRouter = require("./controller/MyInfo.js");
-app.use("/bk/myPage/addressList", addressListRouter());
+app.use("/myPage/addressList", addressListRouter());
 
 //비밀번호찾기 라우터
 const findPwRouter = require("./controller/FindPw.js");
-app.use("/bk/", findPwRouter);
+app.use("/", findPwRouter);
 
 //주문내역보기 라우터
 const ordersRouter = require("./controller/MyInfo.js");
-app.use("/bk/myPage/viewOrders", ordersRouter());
+app.use("/myPage/viewOrders", ordersRouter());
 
 //주문상세보기 라우터
 const orderDetailRouter = require("./controller/OrderDetail.js");
-app.use("/bk/myPage/orderDetail", orderDetailRouter());
+app.use("/myPage/orderDetail", orderDetailRouter());
 
 const analysisRouter = require("./controller/analysis.js");
-app.use("/bk/analysis", analysisRouter());
+app.use("/analysis", analysisRouter());
 
-app.get("/bk/", (req, res) => {
+app.get("/", (req, res) => {
     console.log("백엔드 서버 진입"); //정상작동 확인
     res.send("백엔드 서버 진입");
 });
 
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "build", "index.html"));
+    res.send("404에러");
 });
 
 app.listen(5001, () => {
