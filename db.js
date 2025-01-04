@@ -1,4 +1,5 @@
 const db = require("mysql2");
+require("dotenv").config(); // .env 파일을 로드
 
 const con = db.createConnection({
     host: process.env.DB_HOST,
