@@ -35,6 +35,7 @@ const corsOptions = {
     preflightContinue: false,
     optionsSuccessStatus: 204,
     credentials: true,
+    allowedHeaders: "Content-Type,Authorization",
 };
 
 // app.use(cors());
