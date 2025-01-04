@@ -27,8 +27,8 @@ const upload = multer({
 // CORS 설정
 const corsOptions = {
     origin: [
-        "https://web-jomalone-new-m5gmo1isb2cc7449.sel4.cloudtype.app/",
-        "https://port-0-jomalone-deploy-backend-m5gmo1isb2cc7449.sel4.cloudtype.app/",
+        "https://web-jomalone-new-m5gmo1isb2cc7449.sel4.cloudtype.app",
+        "https://port-0-jomalone-deploy-backend-m5gmo1isb2cc7449.sel4.cloudtype.app",
         "http://localhost:3000",
     ],
     methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
@@ -37,6 +37,7 @@ const corsOptions = {
 
 // app.use(cors());
 app.use(cors(corsOptions));
+app.options("*", cors(corsOptions)); // Preflight 요청 처리
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
