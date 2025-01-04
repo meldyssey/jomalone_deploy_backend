@@ -31,12 +31,8 @@ const corsOptions = {
         "https://port-0-jomalone-deploy-backend-m5gmo1isb2cc7449.sel4.cloudtype.app/",
         "http://localhost:3000",
     ],
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    preflightContinue: false,
-    optionsSuccessStatus: 204,
-    credentials: true,
-    allowedHeaders: "Content-Type,Authorization",
-    exposedHeaders: ["Authorization"],
+    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
 };
 
 // app.use(cors());
