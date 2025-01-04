@@ -26,11 +26,15 @@ const upload = multer({
 
 // CORS 설정
 const corsOptions = {
-    origin: ["https://web-jomalone-new-m5gmo1isb2cc7449.sel4.cloudtype.app/"], // 여러 도메인 허용
-    //origin : '*',
-    credentials: true, // 쿠키를 클라이언트에 전달하려면 이 옵션을 true로 설정
-    //allowedHeaders: ['Content-Type', 'Authorization'],
-    optionsSuccessStatus: 200,
+    origin: [
+        "https://web-jomalone-new-m5gmo1isb2cc7449.sel4.cloudtype.app/",
+        "https://port-0-jomalone-deploy-backend-m5gmo1isb2cc7449.sel4.cloudtype.app/",
+        "http://localhost:3000",
+    ],
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+    credentials: true,
 };
 
 // app.use(cors());
